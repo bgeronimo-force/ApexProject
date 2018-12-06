@@ -1,0 +1,34 @@
+<aura:component Controller="MyFirstComponentControllerApex" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+    
+    <!-- definisco gli attributi -->
+    <aura:attribute name="account" type="Account" />
+    <aura:attribute name="recordId" type="Id" />
+    
+    <!-- ricavo l'owner del account -->
+    <aura:attribute name="user" type="User" />
+    
+    <!-- ricavo la lista dei contatti -->
+    <aura:attribute name="cnt" type="Contact" />
+    <aura:attribute name="col" type="List" />
+    
+    <!-- 
+    <force:recordData aura:id="accountRecord" recordId="{! v.recordId }" targetFields="{! v.account }" layoutType="FULL" />
+    serve a recuperare i dati del record in cui si trova il component, 
+	aura:id serve per dare un id al tag force,
+	recordId : serve ver associarsi al attributo recordId definito sopra (v = this),
+	tagetField :serve per prendere tutti i campi del account ed è un campo di record DATA  
+	layout = serve per visualizzare 
+	-->
+    
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+    <!-- c. : si riferisce al component -->
+    
+    <p> My First Lightning Component! (bgeronimo)_handler </p>
+    <p> Name Account: {! v.account.Name } </p>
+    <p> Phone: {! v.account.Phone } </p>
+    <p> Website: {! v.account.Website } </p>
+    <p> Owner: {! v.user.Name } </p>
+    <lightning:card iconName="standard:contact" title="{! 'Related contacts: ' + v.account.Name }">
+        <lightning.datatable data="{! v.cnt }" columns="{! v.col }" keyField="Id" hideCheckboxColumn="true" />
+    </lightning:card>
+</aura:component>

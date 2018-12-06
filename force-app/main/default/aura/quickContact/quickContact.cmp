@@ -1,0 +1,40 @@
+<aura:component controller="QuickContactController" implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickActionWithoutHeader" access="global" >
+    
+    <!-- Definiamo gli attributi -->
+    <aura:attribute name="account" type="Account" />
+    <aura:attribute name="newContact" type="Contact"
+                    default="{ 'sObject': 'Contact' }" />  <!-- default to empty record -->
+    
+    <!-- Definiamo l'handler init -->
+    <aura:handler name="init" value="{! this }" action="{! c.doInit }" />
+    
+    <!-- Display a header with details about the account -->
+    <div class="slds-page-header" role="banner">
+        <p class="slds-text-heading_label">{!v.account.Name}</p>
+        <h1 class="slds-page-header__title slds-m-right_small
+            slds-truncate slds-align-left">Create New Contact</h1>
+    </div>
+    
+    <!-- Display the new contact form -->
+    <lightning:input aura:id="contactField" name="firstName" label="First Name"
+                     value="{! v.newContact.FirstName }" required="true" />
+    
+    <lightning:input aura:id="contactField" name="lastName" label="Last Name"
+                     value="{! v.newContact.LastName }" required="true" />
+    
+    <lightning:input aura:id="contactField" name="title" label="Title"
+                     value="{! v.newContact.Title }" required="false" />
+    
+    <lightning:input aura:id="contactField" type="email" name="email" label="Email"
+                     value="{! v.newContact.Email }" required="true" />
+    
+    <!--<lightning:button label="Save Contact" onClick="{! c.saveContact }"
+                      variant="brand" class="slds-button slds-button_brand" />
+    
+    <lightning:button label="Cancel" onClick="{! c.cancelSave }" class="slds-button slds-button_destructive" />
+    -->
+    <lightning:button label="Cancel" onclick="{!c.handleCancel}" class="slds-m-top_medium" />
+    <lightning:button label="Save Contact" onclick="{!c.handleSaveContact}"
+               variant="brand" class="slds-m-top_medium"/>
+
+</aura:component>
